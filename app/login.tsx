@@ -3,6 +3,8 @@ import { View, TextInput, Button, StyleSheet, Text, Alert } from "react-native";
 import BackButton from "@/components/BackButton";
 import axios from "axios";
 import { useNavigation } from "expo-router";
+import Landing from "./landing";
+import { router } from "expo-router";
 
 const LoginScreen = () => {
   const navigation = useNavigation();
@@ -28,6 +30,7 @@ const LoginScreen = () => {
         // You can store the token in AsyncStorage or Redux for future use
         storage.storeToken(response.data.token);
         Alert.alert("Success", "Login successful");
+        router.push("/landing");
       } else {
         // Login failed
         Alert.alert("Error", response.data.error);
