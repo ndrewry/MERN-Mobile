@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { View, TextInput, Button, StyleSheet, Text, Alert } from "react-native";
 import axios from "axios";
 import { useNavigation } from "expo-router";
+import BackButton from "@/components/BackButton";
 
 const SignupScreen = () => {
   const navigation = useNavigation();
@@ -79,6 +80,7 @@ const SignupScreen = () => {
         value={password}
       />
       <Button title="Signup" onPress={handleSignup} />
+      <BackButton />
     </View>
   );
 };

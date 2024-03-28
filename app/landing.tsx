@@ -2,19 +2,10 @@ import { Pressable, Text, StyleSheet } from "react-native";
 import { Link } from "expo-router";
 import { View } from "@/components/Themed";
 
-const Welcome = () => {
+const Landing = () => {
   return (
     <View style={styles.container}>
-      <Link href="/login" asChild>
-        <Pressable>
-          <Text>Login</Text>
-        </Pressable>
-      </Link>
-      <Link href="/signup" asChild>
-        <Pressable>
-          <Text>Signup</Text>
-        </Pressable>
-      </Link>
+      <Text>Landing</Text>
     </View>
   );
 };
@@ -35,4 +26,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default Welcome;
+export default Landing;
