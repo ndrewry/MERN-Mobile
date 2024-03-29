@@ -1,5 +1,13 @@
 import React, { useState } from "react";
-import { View, TextInput, Button, StyleSheet, Text, Alert } from "react-native";
+import {
+  View,
+  TextInput,
+  Button,
+  StyleSheet,
+  Text,
+  Alert,
+  Pressable,
+} from "react-native";
 import axios from "axios";
 import { useNavigation } from "expo-router";
 import BackButton from "@/components/BackButton";
@@ -78,9 +86,19 @@ const SignupScreen = () => {
 
   return (
     <View style={styles.container}>
+      <Text
+        style={{
+          fontSize: 25,
+          color: "black",
+          paddingBottom: 40,
+        }}
+      >
+        Sign Up
+      </Text>
+
       <TextInput
         style={styles.input}
-        placeholder="dfgfgd"
+        placeholder="First Name"
         onChangeText={setFirstName}
         value={firstName}
       />
@@ -109,7 +127,20 @@ const SignupScreen = () => {
         secureTextEntry
         value={password}
       />
-      <Button title="Signup" onPress={handleSignup} />
+      <Pressable onPress={handleSignup} style={styles.buttonSignup}>
+        <Text style={{ color: "white", fontSize: 17, fontWeight: "bold" }}>
+          Sign Up
+        </Text>
+      </Pressable>
+
+      {
+        // TODO make sure this works
+      }
+      <Pressable onPress={navigation.goBack()} style={styles.buttonGoBack}>
+        <Text style={{ color: "white", fontSize: 17, fontWeight: "bold" }}>
+          Sign Up
+        </Text>
+      </Pressable>
       <BackButton />
     </View>
   );
@@ -124,11 +155,32 @@ const styles = StyleSheet.create({
   },
   input: {
     width: "100%",
-    height: 40,
-    borderColor: "gray",
-    borderWidth: 1,
+    height: 42,
+    borderColor: "black",
+    borderWidth: 1.5,
     marginBottom: 20,
     paddingHorizontal: 10,
+    borderRadius: 30,
+  },
+  buttonSignup: {
+    marginTop: 40,
+    width: "100%",
+    height: 50,
+    alignItems: "center",
+    justifyContent: "center",
+    backgroundColor: "black",
+    marginBottom: 20,
+    borderRadius: 30,
+  },
+  buttonGoBack: {
+    marginTop: 40,
+    width: "100%",
+    height: 50,
+    alignItems: "center",
+    justifyContent: "center",
+    backgroundColor: "black",
+    marginBottom: 20,
+    borderRadius: 30,
   },
 });
 
