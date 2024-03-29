@@ -64,13 +64,13 @@ function RootLayoutNav() {
           options={{ headerShown: false }}
         />
         <Stack.Screen
-          name="login"
-          component={LoginScreen}
+          name="signup"
+          component={SignupScreen}
           options={{ headerShown: false }}
         />
         <Stack.Screen
-          name="signup"
-          component={SignupScreen}
+          name="login"
+          component={LoginScreen}
           options={{ headerShown: false }}
         />
         <Stack.Screen

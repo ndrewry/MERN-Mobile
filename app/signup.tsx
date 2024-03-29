@@ -26,7 +26,7 @@ const SignupScreen = () => {
   const [password, setPassword] = useState("");
 
   const handleSignup = async () => {
-    var path = "http://10.0.2.2:5000/api/signup";
+    var path = "http://syntax-sensei-a349ca4c0ed0.herokuapp.com/api/signup";
     var storage = require("./tokenStorage.js");
     try {
       const response = await axios.post(path, {
@@ -136,12 +136,14 @@ const SignupScreen = () => {
       {
         // TODO make sure this works
       }
-      <Pressable onPress={navigation.goBack()} style={styles.buttonGoBack}>
+      <Pressable
+        onPress={() => navigation.goBack()}
+        style={styles.buttonGoBack}
+      >
         <Text style={{ color: "white", fontSize: 17, fontWeight: "bold" }}>
-          Sign Up
+          Go Back
         </Text>
       </Pressable>
-      <BackButton />
     </View>
   );
 };
@@ -156,24 +158,23 @@ const styles = StyleSheet.create({
   input: {
     width: "100%",
     height: 42,
-    borderColor: "black",
+    borderColor: "gray",
     borderWidth: 1.5,
     marginBottom: 20,
     paddingHorizontal: 10,
     borderRadius: 30,
   },
   buttonSignup: {
-    marginTop: 40,
+    marginTop: 60,
     width: "100%",
     height: 50,
     alignItems: "center",
     justifyContent: "center",
     backgroundColor: "black",
-    marginBottom: 20,
     borderRadius: 30,
   },
   buttonGoBack: {
-    marginTop: 40,
+    marginTop: 15,
     width: "100%",
     height: 50,
     alignItems: "center",

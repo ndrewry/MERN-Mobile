@@ -11,7 +11,7 @@ import { router } from "expo-router";
 const LoginScreen = () => {
   const navigation = useNavigation();
 
-  var path = "http://10.0.2.2:5000/api/login";
+  var path = "http://syntax-sensei-a349ca4c0ed0.herokuapp.com/api/login";
   var storage = require("./tokenStorage.js");
   const [login, setLogin] = useState("");
   const [password, setPassword] = useState("");
@@ -30,11 +30,12 @@ const LoginScreen = () => {
 
         // TODO - Check if the user is verified
         // var uddecoded = decode(storage.retrieveToken(), { complete: true });
-        console.log(response.data.verified);
+        console.log(response.data);
         if (response.data.verified == false) {
           navigation.navigate("unverified");
         } else {
           Alert.alert("Success", "Login successful");
+          console.log(response.data.token);
           navigation.navigate("landing");
         }
       } else {
