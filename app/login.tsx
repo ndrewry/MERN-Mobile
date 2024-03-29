@@ -1,5 +1,13 @@
 import React, { useState } from "react";
-import { View, TextInput, Button, StyleSheet, Text, Alert } from "react-native";
+import {
+  View,
+  TextInput,
+  Button,
+  StyleSheet,
+  Text,
+  Alert,
+  Pressable,
+} from "react-native";
 import BackButton from "@/components/BackButton";
 import axios from "axios";
 import { useNavigation } from "expo-router";
@@ -53,6 +61,15 @@ const LoginScreen = () => {
 
   return (
     <View style={styles.container}>
+      <Text
+        style={{
+          fontSize: 25,
+          color: "black",
+          paddingBottom: 40,
+        }}
+      >
+        Login
+      </Text>
       <TextInput
         style={styles.input}
         placeholder="Username"
@@ -66,8 +83,20 @@ const LoginScreen = () => {
         secureTextEntry
         value={password}
       />
-      <Button title="Login" onPress={handleLogin} />
-      <BackButton />
+      <Pressable onPress={handleLogin} style={styles.buttonLogin}>
+        <Text style={{ color: "white", fontSize: 17, fontWeight: "bold" }}>
+          Login
+        </Text>
+      </Pressable>
+
+      <Pressable
+        onPress={() => navigation.goBack()}
+        style={styles.buttonGoBack}
+      >
+        <Text style={{ color: "black", fontSize: 17, fontWeight: "bold" }}>
+          Go Back
+        </Text>
+      </Pressable>
     </View>
   );
 };
@@ -81,14 +110,35 @@ const styles = StyleSheet.create({
   },
   input: {
     width: "100%",
-    height: 40,
+    height: 42,
     borderColor: "gray",
-    borderWidth: 1,
+    borderWidth: 1.5,
     marginBottom: 20,
     paddingHorizontal: 10,
+    borderRadius: 30,
   },
   back: {
     marginTop: 20,
+  },
+  buttonLogin: {
+    marginTop: 60,
+    width: "100%",
+    height: 50,
+    alignItems: "center",
+    justifyContent: "center",
+    backgroundColor: "black",
+    borderRadius: 30,
+  },
+  buttonGoBack: {
+    marginTop: 15,
+    width: "100%",
+    height: 50,
+    alignItems: "center",
+    justifyContent: "center",
+    borderColor: "black",
+    borderWidth: 3,
+    marginBottom: 20,
+    borderRadius: 30,
   },
 });
 

@@ -133,14 +133,11 @@ const SignupScreen = () => {
         </Text>
       </Pressable>
 
-      {
-        // TODO make sure this works
-      }
       <Pressable
         onPress={() => navigation.goBack()}
         style={styles.buttonGoBack}
       >
-        <Text style={{ color: "white", fontSize: 17, fontWeight: "bold" }}>
+        <Text style={{ color: "black", fontSize: 17, fontWeight: "bold" }}>
           Go Back
         </Text>
       </Pressable>
@@ -179,7 +176,8 @@ const styles = StyleSheet.create({
     height: 50,
     alignItems: "center",
     justifyContent: "center",
-    backgroundColor: "black",
+    borderColor: "black",
+    borderWidth: 3,
     marginBottom: 20,
     borderRadius: 30,
   },
