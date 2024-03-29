@@ -16,6 +16,8 @@ import ModalScreen from "./modal";
 import Welcome from "./welcome";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import SignupScreen from "./signup";
+import Landing from "./landing";
+import Unverified from "./unverified";
 
 export {
   // Catch any errors thrown by the Layout component.
@@ -69,6 +71,16 @@ function RootLayoutNav() {
         <Stack.Screen
           name="signup"
           component={SignupScreen}
+          options={{ headerShown: false }}
+        />
+        <Stack.Screen
+          name="landing"
+          component={Landing}
+          options={{ headerShown: false }}
+        />
+        <Stack.Screen
+          name="unverified"
+          component={Unverified}
           options={{ headerShown: false }}
         />
       </Stack.Navigator>

@@ -3,15 +3,13 @@ import { View, TextInput, Button, StyleSheet, Text, Alert } from "react-native";
 import BackButton from "@/components/BackButton";
 import axios from "axios";
 import { useNavigation } from "expo-router";
+import { NavigationContainer } from "@react-navigation/native";
+import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import Landing from "./landing";
 import { router } from "expo-router";
 
 const LoginScreen = () => {
   const navigation = useNavigation();
-
-  React.useEffect(() => {
-    navigation.setOptions({ headerShown: false });
-  }, [navigation]);
 
   var path = "http://10.0.2.2:5000/api/login";
   var storage = require("./tokenStorage.js");
@@ -29,8 +27,16 @@ const LoginScreen = () => {
         // Login successful
         // You can store the token in AsyncStorage or Redux for future use
         storage.storeToken(response.data.token);
-        Alert.alert("Success", "Login successful");
-        router.push("/landing");
+
+        // TODO - Check if the user is verified
+        // var uddecoded = decode(storage.retrieveToken(), { complete: true });
+        console.log(response.data.verified);
+        if (response.data.verified == false) {
+          navigation.navigate("unverified");
+        } else {
+          Alert.alert("Success", "Login successful");
+          navigation.navigate("landing");
+        }
       } else {
         // Login failed
         Alert.alert("Error", response.data.error);

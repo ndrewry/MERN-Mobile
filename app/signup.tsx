@@ -32,7 +32,9 @@ const SignupScreen = () => {
       if (response.data.token) {
         // Signup successful
         storage.storeToken(response.data.token);
+        sendLink(response.data.token);
         Alert.alert("Success", "Signup successful");
+        navigation.navigate("login");
       } else {
         // Signup failed
         Alert.alert("Error", response.data.error);
@@ -45,6 +47,34 @@ const SignupScreen = () => {
       );
     }
   };
+
+  function sendLink(storedToken: any) {
+    // Incoming: Token
+    console.log("Token: " + storedToken);
+    var obj1 = { token: storedToken };
+    var js1 = JSON.stringify(obj1);
+    var config1 = {
+      method: "post",
+      url: "http://10.0.2.2:5000/api/sendVerificationLink",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      data: js1,
+    };
+    axios(config1)
+      .then(function (response) {
+        var res = response.data;
+        if (res.error) {
+        } else {
+          Alert.alert(
+            "Verification email sent. Please check your email to verify your account."
+          );
+        }
+      })
+      .catch(function (error) {
+        console.error(error.response.data);
+      });
+  }
 
   return (
     <View style={styles.container}>

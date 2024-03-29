@@ -6,7 +6,7 @@ import BackButton from "@/components/BackButton";
 const Landing = () => {
   return (
     <View style={styles.container}>
-      <Text>Landing</Text>
+      <Text>unverified</Text>
       <BackButton />
     </View>
   );
