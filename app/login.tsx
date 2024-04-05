@@ -8,6 +8,7 @@ import {
   Alert,
   Pressable,
 } from "react-native";
+
 import BackButton from "@/components/BackButton";
 import axios from "axios";
 import { useNavigation } from "expo-router";
@@ -17,6 +18,7 @@ import Landing from "./landing";
 import { router } from "expo-router";
 
 const LoginScreen = () => {
+
   const navigation = useNavigation();
 
   var path = "http://syntax-sensei-a349ca4c0ed0.herokuapp.com/api/login";
@@ -39,12 +41,13 @@ const LoginScreen = () => {
         // TODO - Check if the user is verified
         // var uddecoded = decode(storage.retrieveToken(), { complete: true });
         console.log(response.data);
+
         if (response.data.verified == false) {
-          navigation.navigate("unverified");
+          navigation.navigate('unverified');
         } else {
           Alert.alert("Success", "Login successful");
           console.log(response.data.token);
-          navigation.navigate("landing");
+          navigation.navigate('landing');
         }
       } else {
         // Login failed

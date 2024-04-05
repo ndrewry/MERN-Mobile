@@ -9,15 +9,13 @@ import {
   Pressable,
 } from "react-native";
 import axios from "axios";
-import { useNavigation } from "expo-router";
+import {  useNavigation } from "expo-router";
 import BackButton from "@/components/BackButton";
 
 const SignupScreen = () => {
   const navigation = useNavigation();
 
-  React.useEffect(() => {
-    navigation.setOptions({ headerShown: false });
-  }, [navigation]);
+  React.useEffect(() => {navigation.setOptions({ headerShown: false });}, [navigation]);
 
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");

@@ -14,10 +14,12 @@ import { useColorScheme } from "@/components/useColorScheme";
 import LoginScreen from "./login";
 import ModalScreen from "./modal";
 import Welcome from "./welcome";
+import { useNavigation } from "expo-router";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import SignupScreen from "./signup";
 import Landing from "./landing";
 import Unverified from "./unverified";
+import React from "react";
 
 export {
   // Catch any errors thrown by the Layout component.
@@ -57,33 +59,28 @@ function RootLayoutNav() {
 
   return (
     <ThemeProvider value={colorScheme === "dark" ? DarkTheme : DefaultTheme}>
-      <Stack.Navigator>
-        <Stack.Screen
-          name="welcome"
-          component={Welcome}
-          options={{ headerShown: false }}
-        />
-        <Stack.Screen
-          name="signup"
-          component={SignupScreen}
-          options={{ headerShown: false }}
-        />
-        <Stack.Screen
-          name="login"
-          component={LoginScreen}
-          options={{ headerShown: false }}
-        />
-        <Stack.Screen
-          name="landing"
-          component={Landing}
-          options={{ headerShown: false }}
-        />
-        <Stack.Screen
-          name="unverified"
-          component={Unverified}
-          options={{ headerShown: false }}
-        />
-      </Stack.Navigator>
+        <Stack.Navigator>
+          <Stack.Screen
+            name="welcome"
+            component={Welcome}
+            options={{ headerShown: false }} />
+          <Stack.Screen
+            name="signup"
+            component={SignupScreen}
+            options={{ headerShown: false }} />
+          <Stack.Screen
+            name="login"
+            component={LoginScreen}
+            options={{ headerShown: false }} />
+          <Stack.Screen
+            name="landing"
+            component={Landing}
+            options={{ headerShown: false }} />
+          <Stack.Screen
+            name="unverified"
+            component={Unverified}
+            options={{ headerShown: false }} />
+        </Stack.Navigator>
     </ThemeProvider>
   );
 }

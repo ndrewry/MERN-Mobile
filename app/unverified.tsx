@@ -2,6 +2,7 @@ import { Pressable, Text, StyleSheet } from "react-native";
 import { Link } from "expo-router";
 import { View } from "@/components/Themed";
 import BackButton from "@/components/BackButton";
+import React from "react";
 
 const Landing = () => {
   return (
