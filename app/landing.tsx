@@ -10,77 +10,153 @@ import * as Progress from "react-native-progress";
 import { Link } from "expo-router";
 import { View } from "@/components/Themed";
 import BackButton from "@/components/BackButton";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigation } from "expo-router";
+import axios from "axios";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+
+var imgPath = "null";
+var progress = 0.3;
+var token = "null";
+var storage = require("./tokenStorage.js");
+type course = {
+  Language: string;
+  Description: string;
+  LogoFile: string;
+};
+
+type userCourse = {
+  Language: string;
+  CurrentQuestion: number;
+  NumCorrect: number;
+};
+function returnCourseInfo(courseName: string, courses: course[]) {
+  let desc = courses.find((course) => course.Language === courseName) || {
+    Language: "null",
+    Description: "null",
+    LogoFile: "null",
+  };
+  imgPath = desc.LogoFile;
+  return desc.Description;
+}
+
+function getCourseInfo(courses: any) {
+  var courseInfoArray: any = [];
+  return new Promise(async (resolve, reject) => {
+    let promises = [];
+    for (let i = 0; i < courses.length; i++) {
+      var config = {
+        method: "get",
+        url:
+          "http://syntax-sensei-a349ca4c0ed0.herokuapp.com/api/getCourse/" +
+          courses[i].Language,
+      };
+      //console.log("url: ", config.url);
+      let promise = axios(config)
+        .then(function (response) {
+          var res = response.data;
+          if (res.error) {
+            console.log("Error getting course info");
+          } else {
+            try {
+              //console.log("res: ", res);
+              courseInfoArray.push(res.courseData);
+            } catch (e: any) {
+              console.log(e.toString());
+              return "";
+            }
+          }
+        })
+        .catch(function (error) {
+          console.log(error);
+        });
+      promises.push(promise);
+    }
+
+    await Promise.all(promises);
+    console.log("courseInfoArray: ", courseInfoArray);
+    resolve(courseInfoArray);
+  });
+}
+
+const getCourses = async () => {
+  type configType = {
+    method: string;
+    url: string;
+    headers: {
+      Authorization: string;
+    };
+  };
+  var config: configType = {
+    method: "get",
+    url: "http://syntax-sensei-a349ca4c0ed0.herokuapp.com/api/user-courses",
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  };
+
+  console.log("config: ", config);
+
+  try {
+    const response = await axios(config);
+    var res = response.data;
+    if (res.error) {
+      return null;
+    } else {
+      return res.courses;
+    }
+  } catch (error) {
+    console.log(error);
+  }
+};
 
 const Landing = () => {
   const navigation = useNavigation();
 
-  const courses = [
-    {
-      Language: "c++",
-      Description: "c ++ descpription",
-      image:
-        "https://upload.wikimedia.org/wikipedia/commons/thumb/1/18/ISO_C%2B%2B_Logo.svg/1822px-ISO_C%2B%2B_Logo.svg.png",
-    },
-    {
-      Language: "python",
-      Description: "python descpription",
-      image:
-        "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c3/Python-logo-notext.svg/1869px-Python-logo-notext.svg.png",
-    },
-    {
-      Language: "haskell",
-      Description: "haskell descpription",
-      image:
-        "https://upload.wikimedia.org/wikipedia/commons/thumb/1/1c/Haskell-Logo.svg/2560px-Haskell-Logo.svg.png",
-    },
-  ];
-
-  const userCourses = [
-    {
-      Language: "c++",
-      CurrentQuestion: 6,
-      NumCorrect: 2,
-    },
-    {
-      Language: "python",
-      CurrentQuestion: 7,
-      NumCorrect: 6,
-    },
-    {
-      Language: "haskell",
-      CurrentQuestion: 2,
-      NumCorrect: 2,
-    },
-  ];
-
   // handle pressing a card
+
   function handlePress() {
     // retrieve UserCourse data from the server
   }
 
-  var imgPath = "null";
-  function returnCourseDesc(courseName: string) {
-    // retrieve course information from the server
-    // for now static
-    let desc = courses.find((course) => course.Language === courseName) || {
-      Language: "null",
-      Description: "null",
-      image: "null",
+  const [courses, setCourses] = useState<course[]>([]);
+  const [courseInfo, setCourseInfo] = useState([]);
+  const [isLoaded, setIsLoaded] = useState(false);
+
+  useEffect(() => {
+    let ignore = false;
+
+    AsyncStorage.getItem("token").then((t: any) => {
+      token = t;
+      var res = getCourses();
+
+      if (res !== null) {
+        res.then((res) => {
+          if (ignore) return;
+
+          setCourses(res);
+
+          getCourseInfo(res).then((courseInfoArray: any) => {
+            setCourseInfo(courseInfoArray);
+            setIsLoaded(true);
+          });
+        });
+      }
+    });
+
+    return () => {
+      ignore = true;
     };
-    imgPath = desc.image;
-    return desc.Description;
-  }
+  }, []);
 
   return (
     <SafeAreaView style={styles.container}>
       <FlatList
-        data={userCourses}
+        data={courses}
         renderItem={({ item }) => (
           <Pressable style={[styles.option, styles.shadowProp]}>
             <Text style={{ color: "black", fontSize: 17, fontWeight: "bold" }}>
-              {returnCourseDesc(item.Language)}
+              {returnCourseInfo(item.Language, courseInfo)}
             </Text>
             <Image
               source={{
@@ -89,7 +165,11 @@ const Landing = () => {
               style={[styles.image, styles.shadowProp]}
               resizeMode="contain"
             />
-            <Progress.Bar color={"red"} progress={0.3} width={200} />
+            <Progress.Bar
+              color={"red"}
+              progress={item.CurrentQuestion / 10}
+              width={200}
+            />
           </Pressable>
         )}
         ItemSeparatorComponent={() => <View style={styles.separator} />}

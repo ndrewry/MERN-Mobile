@@ -16,12 +16,13 @@ import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import Landing from "./landing";
 import { router } from "expo-router";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 const LoginScreen = () => {
   const navigation = useNavigation();
 
   var path = "http://syntax-sensei-a349ca4c0ed0.herokuapp.com/api/login";
-  var storage = require("./tokenStorage.js");
+  //var storage = require("./tokenStorage.js");
   const [login, setLogin] = useState("");
   const [password, setPassword] = useState("");
 
@@ -35,7 +36,8 @@ const LoginScreen = () => {
       if (response.data.token) {
         // Login successful
         // You can store the token in AsyncStorage or Redux for future use
-        storage.storeToken(response.data.token);
+        //storage.storeToken(response.data.token);
+        AsyncStorage.setItem("token", response.data.token);
 
         // TODO - Check if the user is verified
         // var uddecoded = decode(storage.retrieveToken(), { complete: true });
