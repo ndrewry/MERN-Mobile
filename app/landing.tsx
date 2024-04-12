@@ -19,7 +19,7 @@ var imgPath = "null";
 var progress = 0.3;
 var token = "null";
 var storage = require("./tokenStorage.js");
-type course = {
+type courseInfo = {
   Language: string;
   Description: string;
   LogoFile: string;
@@ -30,7 +30,7 @@ type userCourse = {
   CurrentQuestion: number;
   NumCorrect: number;
 };
-function returnCourseInfo(courseName: string, courses: course[]) {
+function returnCourseInfo(courseName: string, courses: courseInfo[]) {
   let desc = courses.find((course) => course.Language === courseName) || {
     Language: "null",
     Description: "null",
@@ -74,7 +74,7 @@ function getCourseInfo(courses: any) {
     }
 
     await Promise.all(promises);
-    console.log("courseInfoArray: ", courseInfoArray);
+    //.log("courseInfoArray: ", courseInfoArray);
     resolve(courseInfoArray);
   });
 }
@@ -91,11 +91,11 @@ const getCourses = async () => {
     method: "get",
     url: "http://syntax-sensei-a349ca4c0ed0.herokuapp.com/api/user-courses",
     headers: {
-    Authorization: `Bearer ${token}`,
+      Authorization: `Bearer ${token}`,
     },
- };
+  };
 
-  console.log("config: ", config);
+  //console.log("config: ", config);
 
   try {
     const response = await axios(config);
@@ -110,17 +110,49 @@ const getCourses = async () => {
   }
 };
 
+const GetQuestionBank = async (courseName: string) => {
+  try {
+    const response = await axios.get(
+      "http://syntax-sensei-a349ca4c0ed0.herokuapp.com/api/course-question-bank/" +
+        courseName
+    );
+    const { questions, error } = response.data;
+    //console.log("response in get q: ", response.data);
+
+    if (error) {
+      console.error("Error fetching data:", error);
+      return [];
+    }
+    return questions;
+  } catch (error) {
+    console.error("Error fetching data:", error);
+    return [];
+  }
+};
+
+const HandlePress = async (
+  item: userCourse,
+  token: string,
+  navigation: any
+): Promise<any> => {
+  try {
+    const QuestionBank = await GetQuestionBank(item.Language);
+    // console.log("Questions in handlepress: ", Questions);
+    navigation.push("questions", {
+      QuestionBank: QuestionBank,
+      userCourse: item,
+      token: token,
+    });
+  } catch (error) {
+    console.error("Error fetching data:", error);
+  }
+};
+
 const Landing = () => {
   const navigation = useNavigation();
 
-  // handle pressing a card
-
-  function handlePress() {
-    // retrieve UserCourse data from the server
-  }
-
-  const [courses, setCourses] = useState<course[]>([]);
-  const [courseInfo, setCourseInfo] = useState([]);
+  const [courses, setCourses] = useState<userCourse[]>([]); // userCourses
+  const [courseInfo, setCourseInfo] = useState([]); // courseInfo
   const [isLoaded, setIsLoaded] = useState(false);
 
   useEffect(() => {
@@ -149,12 +181,38 @@ const Landing = () => {
     };
   }, []);
 
+  useEffect(() => {
+    navigation.addListener("focus", () => {
+      let ignore = false;
+      AsyncStorage.getItem("token").then((t: any) => {
+        token = t;
+        var res = getCourses();
+
+        if (res !== null) {
+          res.then((res) => {
+            if (ignore) return;
+
+            setCourses(res);
+
+            getCourseInfo(res).then((courseInfoArray: any) => {
+              setCourseInfo(courseInfoArray);
+              setIsLoaded(true);
+            });
+          });
+        }
+      });
+    });
+  }, [navigation]);
+
   return (
     <SafeAreaView style={styles.container}>
       <FlatList
         data={courses}
         renderItem={({ item }) => (
-          <Pressable style={[styles.option, styles.shadowProp]}>
+          <Pressable
+            style={[styles.option, styles.shadowProp]}
+            onPress={() => HandlePress(item, token, navigation)}
+          >
             <Text style={{ color: "black", fontSize: 17, fontWeight: "bold" }}>
               {returnCourseInfo(item.Language, courseInfo)}
             </Text>
