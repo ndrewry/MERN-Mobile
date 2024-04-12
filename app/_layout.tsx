@@ -20,6 +20,7 @@ import SignupScreen from "./signup";
 import Landing from "./landing";
 import Unverified from "./unverified";
 import React from "react";
+import Questions from "./questions";
 
 export {
   // Catch any errors thrown by the Layout component.
@@ -79,6 +80,10 @@ function RootLayoutNav() {
           <Stack.Screen
             name="unverified"
             component={Unverified}
+            options={{ headerShown: false }} />
+          <Stack.Screen
+            name="questions"
+            component={Questions}
             options={{ headerShown: false }} />
         </Stack.Navigator>
     </ThemeProvider>

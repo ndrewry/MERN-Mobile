@@ -91,9 +91,9 @@ const getCourses = async () => {
     method: "get",
     url: "http://syntax-sensei-a349ca4c0ed0.herokuapp.com/api/user-courses",
     headers: {
-      Authorization: `Bearer ${token}`,
+    Authorization: `Bearer ${token}`,
     },
-  };
+ };
 
   console.log("config: ", config);
 
