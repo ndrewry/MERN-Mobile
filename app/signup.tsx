@@ -11,6 +11,8 @@ import {
 import axios from "axios";
 import {  useNavigation } from "expo-router";
 import BackButton from "@/components/BackButton";
+import LoginScreen from "./login";
+
 
 const SignupScreen = () => {
   const navigation = useNavigation();
@@ -86,9 +88,9 @@ const SignupScreen = () => {
     <View style={styles.container}>
       <Text
         style={{
-          fontSize: 25,
-          color: "black",
-          paddingBottom: 40,
+          fontSize: 40,
+          color: "#2e2e2e",
+          paddingBottom: 50,
         }}
       >
         Sign Up
@@ -135,7 +137,7 @@ const SignupScreen = () => {
         onPress={() => navigation.goBack()}
         style={styles.buttonGoBack}
       >
-        <Text style={{ color: "black", fontSize: 17, fontWeight: "bold" }}>
+        <Text style={{ color: "#fa304c", fontSize: 17, fontWeight: "bold" }}>
           Go Back
         </Text>
       </Pressable>
@@ -157,7 +159,6 @@ const styles = StyleSheet.create({
     borderWidth: 1.5,
     marginBottom: 20,
     paddingHorizontal: 10,
-    borderRadius: 30,
   },
   buttonSignup: {
     marginTop: 60,
@@ -165,8 +166,7 @@ const styles = StyleSheet.create({
     height: 50,
     alignItems: "center",
     justifyContent: "center",
-    backgroundColor: "black",
-    borderRadius: 30,
+    backgroundColor: "#fa304c",
   },
   buttonGoBack: {
     marginTop: 15,
@@ -174,11 +174,10 @@ const styles = StyleSheet.create({
     height: 50,
     alignItems: "center",
     justifyContent: "center",
-    borderColor: "black",
+    borderColor: "#fa304c",
     borderWidth: 3,
     marginBottom: 20,
-    borderRadius: 30,
-  },
+  }
 });
 
 export default SignupScreen;

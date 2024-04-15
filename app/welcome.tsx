@@ -58,7 +58,7 @@ const Welcome = () => {
 
         <Link href="/login" asChild>
           <Pressable style={styles.buttonLogin}>
-            <Text style={{ color: "red" }}>I ALREADY HAVE AN ACCOUNT</Text>
+            <Text style={{ color: "#fa304c" }}>I ALREADY HAVE AN ACCOUNT</Text>
           </Pressable>
         </Link>
       </View>
@@ -85,23 +85,23 @@ const styles = StyleSheet.create({
     marginTop: 60,
   },
   buttonSignup: {
-    marginTop: 70,
+    marginTop: 60,
     width: "100%",
     height: 50,
     alignItems: "center",
     justifyContent: "center",
-    backgroundColor: "red",
-    marginBottom: 20,
+    backgroundColor: "#fa304c",
   },
   buttonLogin: {
+    marginTop: 15,
     width: "100%",
     height: 50,
     alignItems: "center",
     justifyContent: "center",
     borderWidth: 2,
-    borderColor: "red",
+    borderColor: "#fa304c",
     marginBottom: 60,
-  },
+  }
 });
 
 export default Welcome;

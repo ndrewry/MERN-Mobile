@@ -18,6 +18,7 @@ import Landing from "./landing";
 import { router } from "expo-router";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
+
 const LoginScreen = () => {
   const navigation = useNavigation();
 
@@ -47,7 +48,7 @@ const LoginScreen = () => {
           navigation.navigate("unverified");
         } else {
           console.log(response.data.token);
-          navigation.navigate("landing");
+          navigation.navigate("landing" );
         }
       } else {
         // Login failed
@@ -64,12 +65,7 @@ const LoginScreen = () => {
 
   return (
     <View style={styles.container}>
-      <Text
-        style={{
-          fontSize: 25,
-          color: "black",
-          paddingBottom: 40,
-        }}
+      <Text style={{fontSize: 40, color: "#2e2e2e", paddingBottom: 80}}
       >
         Login
       </Text>
@@ -96,7 +92,7 @@ const LoginScreen = () => {
         onPress={() => navigation.goBack()}
         style={styles.buttonGoBack}
       >
-        <Text style={{ color: "black", fontSize: 17, fontWeight: "bold" }}>
+        <Text style={{ color: "#fa304c", fontSize: 17, fontWeight: "bold" }}>
           Go Back
         </Text>
       </Pressable>
@@ -118,7 +114,7 @@ const styles = StyleSheet.create({
     borderWidth: 1.5,
     marginBottom: 20,
     paddingHorizontal: 10,
-    borderRadius: 30,
+    borderRadius: 3,
   },
   back: {
     marginTop: 20,
@@ -129,8 +125,8 @@ const styles = StyleSheet.create({
     height: 50,
     alignItems: "center",
     justifyContent: "center",
-    backgroundColor: "black",
-    borderRadius: 30,
+    backgroundColor: "#fa304c",
+    borderRadius: 3,
   },
   buttonGoBack: {
     marginTop: 15,
@@ -138,11 +134,11 @@ const styles = StyleSheet.create({
     height: 50,
     alignItems: "center",
     justifyContent: "center",
-    borderColor: "black",
+    borderColor: "#fa304c",
     borderWidth: 3,
     marginBottom: 20,
-    borderRadius: 30,
-  },
+    borderRadius: 3,
+  }
 });
 
 export default LoginScreen;

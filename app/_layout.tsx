@@ -21,6 +21,7 @@ import Landing from "./landing";
 import Unverified from "./unverified";
 import React from "react";
 import Questions from "./questions";
+import 'react-native-gesture-handler';
 
 export {
   // Catch any errors thrown by the Layout component.
