@@ -294,7 +294,7 @@ const styles = StyleSheet.create({
   },
   option: {
     width: 300,
-    height: "95%",
+    height: "89%",
     backgroundColor: "white",
     justifyContent: "center",
     alignItems: "center",

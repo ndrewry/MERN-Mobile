@@ -517,7 +517,7 @@ const Questions = ({ route, navigation }) => {
                 <Text style={styles.choiceText}>{Answer4}</Text>
               </TouchableHighlight>
             </View>
-            <View style={{ marginTop: 10 }}>
+            <View style={{ marginTop: 30 }}>
               {Correct && <Text style={styles.message}>Correct!</Text>}
               {Incorrect && (
                 <Text style={styles.message}>The correct answer was...</Text>
@@ -529,7 +529,7 @@ const Questions = ({ route, navigation }) => {
 
             <View>
               {NextButton && (
-                <Pressable
+                <Pressable style = {styles.nextButton}
                   id="NextQuestionButton"
                   onPress={() => NextQuestion(CurrentQuestion)}
                 >
@@ -538,7 +538,7 @@ const Questions = ({ route, navigation }) => {
               )}
 
               {RestartButton && (
-                <Pressable
+                <Pressable style = {styles.nextButton}
                   id="RestartButton"
                   onPress={() => RestartLesson(token, Language, 0, 0)}
                 >
@@ -589,6 +589,8 @@ const styles = StyleSheet.create({
     fontSize: 30,
     fontWeight: "bold",
     color: "white",
+    textShadowColor: "grey",
+    textShadowRadius: 5,
   },
   loadingContainer: {
     flex: 1,
@@ -601,15 +603,16 @@ const styles = StyleSheet.create({
   },
   choice: {
     paddingHorizontal: 10,
-    paddingVertical: 8,
+    paddingVertical: 5,
     borderWidth: 1,
     borderColor: "#222",
     borderRadius: 8,
     marginVertical: 10,
     width: 350,
+
   },
   correctStyle: {
-    backgroundColor: "green",
+    backgroundColor: "#38b031",
     paddingHorizontal: 10,
     paddingVertical: 8,
     borderWidth: 1,
@@ -659,6 +662,14 @@ const styles = StyleSheet.create({
   message: {
     fontSize: 20,
     fontWeight: "bold",
+  },
+  nextButton:{
+    paddingVertical: "2%",
+    paddingHorizontal: 20,
+    borderWidth: 1,
+    borderColor: "#ccc",
+    borderRadius: 8,
+
   },
 });
 
