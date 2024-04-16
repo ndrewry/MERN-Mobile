@@ -437,7 +437,7 @@ const Questions = ({ route, navigation }) => {
         <SafeAreaView style={{ flex: 1, flexDirection: "column" }}>
           <View
             style={{
-              flex: 0.9,
+              flex: 1.3,
               backgroundColor: "#fa304c",
               alignItems: "center",
             }}
@@ -558,7 +558,7 @@ const Questions = ({ route, navigation }) => {
               ]}
               onPress={HandleDashboardPress}
             >
-              <Text style={styles.choiceText}>Dashboard</Text>
+              <Text style={styles.buttonText}>Dashboard</Text>
             </Pressable>
             <Pressable
               style={({ pressed }) => [
@@ -569,7 +569,7 @@ const Questions = ({ route, navigation }) => {
               ]}
               onPress={HandleLogout}
             >
-              <Text style={styles.choiceText}>Logout</Text>
+              <Text style={styles.buttonText}>Logout</Text>
             </Pressable>
           </View>
         </SafeAreaView>
@@ -580,17 +580,18 @@ const Questions = ({ route, navigation }) => {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
+    flex: 1.3,
     flexDirection: "row",
     justifyContent: "center",
     alignItems: "center",
   },
   title: {
-    fontSize: 30,
+    fontSize: 35,
     fontWeight: "bold",
     color: "white",
-    textShadowColor: "grey",
+    textShadowColor: "black",
     textShadowRadius: 5,
+    marginTop: "4%",
   },
   loadingContainer: {
     flex: 1,
@@ -638,6 +639,7 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderColor: "#ccc",
     borderRadius: 8,
+    marginTop:"5%",
   },
   logoutButton: {
     paddingHorizontal: 30,
@@ -646,10 +648,16 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderColor: "#ccc",
     borderRadius: 8,
+    marginTop:"5%",
   },
   choiceText: {
     fontSize: 16,
     color: "#333",
+  },
+  buttonText: {
+    fontSize: 20,
+    color: "#fa304c",
+    fontWeight: "bold",
   },
   questionContainer: {
     borderColor: "black",
@@ -669,6 +677,7 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderColor: "#ccc",
     borderRadius: 8,
+    marginTop: "2%",
 
   },
 });

@@ -92,6 +92,7 @@ const SignupScreen = () => {
           fontSize: 40,
           color: "#2e2e2e",
           paddingBottom: 50,
+          fontWeight:"bold",
         }}
       >
         Sign Up

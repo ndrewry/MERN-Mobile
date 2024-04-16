@@ -64,7 +64,7 @@ const LoginScreen = () => {
 
   return (
     <View style={styles.container}>
-      <Text style={{ fontSize: 40, color: "#2e2e2e", paddingBottom: 80 }}>
+      <Text style={{ fontSize: 40, color: "#2e2e2e", paddingBottom: 80, fontWeight:"bold"}}>
         Login
       </Text>
       <TextInput
