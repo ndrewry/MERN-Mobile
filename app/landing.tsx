@@ -206,9 +206,7 @@ const Landing = () => {
 
   return (
     <SafeAreaView style={styles.container}>
-      <Text style={{ fontSize: 40, color: "#2e2e2e", paddingBottom: 10 }}>
-        My Courses
-      </Text>
+      <Text style={styles.title}>My Courses</Text>
       <FlatList
         data={courses}
         renderItem={({ item }) => (
@@ -216,7 +214,13 @@ const Landing = () => {
             style={[styles.option, styles.shadowProp]}
             onPress={() => HandlePress(item, token, navigation)}
           >
-            <Text style={{ color: "black", fontSize: 17, fontWeight: "bold" }}>
+            <Text
+              style={{
+                color: "black",
+                fontSize: 17,
+                fontFamily: "Impact",
+              }}
+            >
               {returnCourseInfo(item.Language, courseInfo)}
             </Text>
             <Image
@@ -250,7 +254,14 @@ const Landing = () => {
       />
 
       <Pressable onPress={() => navigation.navigate("login")}>
-        <Text style={{ color: "black", fontSize: 17, fontWeight: "bold" }}>
+        <Text
+          style={{
+            color: "black",
+            fontSize: 17,
+            fontWeight: "bold",
+            paddingTop: 10,
+          }}
+        >
           Logout
         </Text>
       </Pressable>
@@ -297,6 +308,12 @@ const styles = StyleSheet.create({
     width: "100%",
     height: 3,
     backgroundColor: "#f1f2f6",
+  },
+  title: {
+    fontSize: 35,
+    color: "#2e2e2e",
+    paddingBottom: 10,
+    fontFamily: "Impact",
   },
 });
 
