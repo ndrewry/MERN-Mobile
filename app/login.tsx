@@ -18,7 +18,6 @@ import Landing from "./landing";
 import { router } from "expo-router";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
-
 const LoginScreen = () => {
   const navigation = useNavigation();
 
@@ -48,7 +47,7 @@ const LoginScreen = () => {
           navigation.navigate("unverified");
         } else {
           console.log(response.data.token);
-          navigation.navigate("landing" );
+          navigation.navigate("landing");
         }
       } else {
         // Login failed
@@ -65,8 +64,7 @@ const LoginScreen = () => {
 
   return (
     <View style={styles.container}>
-      <Text style={{fontSize: 40, color: "#2e2e2e", paddingBottom: 80}}
-      >
+      <Text style={{ fontSize: 40, color: "#2e2e2e", paddingBottom: 80 }}>
         Login
       </Text>
       <TextInput
@@ -82,6 +80,7 @@ const LoginScreen = () => {
         secureTextEntry
         value={password}
       />
+
       <Pressable onPress={handleLogin} style={styles.buttonLogin}>
         <Text style={{ color: "white", fontSize: 17, fontWeight: "bold" }}>
           Login
@@ -94,6 +93,15 @@ const LoginScreen = () => {
       >
         <Text style={{ color: "#fa304c", fontSize: 17, fontWeight: "bold" }}>
           Go Back
+        </Text>
+      </Pressable>
+
+      <Pressable
+        onPress={() => navigation.navigate("forgotPassword")}
+        style={{ marginTop: 20 }}
+      >
+        <Text style={{ color: "black", fontSize: 17, fontWeight: "bold" }}>
+          Forgot Password?
         </Text>
       </Pressable>
     </View>
@@ -120,7 +128,7 @@ const styles = StyleSheet.create({
     marginTop: 20,
   },
   buttonLogin: {
-    marginTop: 60,
+    marginTop: 30,
     width: "100%",
     height: 50,
     alignItems: "center",
@@ -138,7 +146,7 @@ const styles = StyleSheet.create({
     borderWidth: 3,
     marginBottom: 20,
     borderRadius: 3,
-  }
+  },
 });
 
 export default LoginScreen;

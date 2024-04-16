@@ -21,7 +21,8 @@ import Landing from "./landing";
 import Unverified from "./unverified";
 import React from "react";
 import Questions from "./questions";
-import 'react-native-gesture-handler';
+import "react-native-gesture-handler";
+import ForgotPassword from "./forgotPassword";
 
 export {
   // Catch any errors thrown by the Layout component.
@@ -61,32 +62,43 @@ function RootLayoutNav() {
 
   return (
     <ThemeProvider value={colorScheme === "dark" ? DarkTheme : DefaultTheme}>
-        <Stack.Navigator>
-          <Stack.Screen
-            name="welcome"
-            component={Welcome}
-            options={{ headerShown: false }} />
-          <Stack.Screen
-            name="signup"
-            component={SignupScreen}
-            options={{ headerShown: false }} />
-          <Stack.Screen
-            name="login"
-            component={LoginScreen}
-            options={{ headerShown: false }} />
-          <Stack.Screen
-            name="landing"
-            component={Landing}
-            options={{ headerShown: false }} />
-          <Stack.Screen
-            name="unverified"
-            component={Unverified}
-            options={{ headerShown: false }} />
-          <Stack.Screen
-            name="questions"
-            component={Questions}
-            options={{ headerShown: false }} />
-        </Stack.Navigator>
+      <Stack.Navigator>
+        <Stack.Screen
+          name="welcome"
+          component={Welcome}
+          options={{ headerShown: false }}
+        />
+        <Stack.Screen
+          name="signup"
+          component={SignupScreen}
+          options={{ headerShown: false }}
+        />
+        <Stack.Screen
+          name="login"
+          component={LoginScreen}
+          options={{ headerShown: false }}
+        />
+        <Stack.Screen
+          name="forgotPassword"
+          component={ForgotPassword}
+          options={{ headerShown: false }}
+        />
+        <Stack.Screen
+          name="landing"
+          component={Landing}
+          options={{ headerShown: false }}
+        />
+        <Stack.Screen
+          name="unverified"
+          component={Unverified}
+          options={{ headerShown: false }}
+        />
+        <Stack.Screen
+          name="questions"
+          component={Questions}
+          options={{ headerShown: false }}
+        />
+      </Stack.Navigator>
     </ThemeProvider>
   );
 }
