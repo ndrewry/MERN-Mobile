@@ -449,18 +449,34 @@ const Questions = ({ route, navigation }) => {
               flex: 10,
               backgroundColor: "white",
               alignItems: "center",
+              borderTopRightRadius: 9,
+              borderTopLeftRadius: 9,
+              borderBottomLeftRadius: 9,
+              borderBottomRightRadius: 9,
             }}
           >
-            <Text style={{ marginTop: 20, fontSize: 15 }}>
-              Correct: {QuestionsCorrect} {"          "}Incorrect:{" "}
-              {QuestionsIncorrect}
-            </Text>
-            <Progress.Bar
-              color={"#fa304c"}
-              progress={progress / 100}
-              width={200}
-              style={{ marginTop: 10 }}
-            />
+            
+            <View style={styles.senseiProg}>
+                <Image
+                    source={require("../assets/images/SenseiCropped.png")}
+                    style={styles.image}
+                    resizeMode="contain"
+
+                />
+                 <View style={{flexDirection:'column',marginTop: 5, paddingLeft: "3%"}}>
+                    <Text style={{ marginTop: "15%", fontSize: 15 }}>
+                                Correct: {QuestionsCorrect} {"          "}Incorrect:{" "}
+                                {QuestionsIncorrect}
+                    </Text>  
+                    <Progress.Bar
+                            color={"#fa304c"}
+                            progress={progress / 100}
+                            width={200}
+                            style={{marginTop:5}}
+                    />
+                </View>
+            </View>
+
             <View style={styles.questionContainer}>
               <Text style={styles.question}>{QuestionText}</Text>
             </View>
@@ -552,9 +568,10 @@ const Questions = ({ route, navigation }) => {
             <Pressable
               style={({ pressed }) => [
                 {
-                  backgroundColor: pressed ? "gray" : "white",
+                  backgroundColor: pressed ? "#fa304c" : "white",
+                  
                 },
-                styles.dashboardButton,
+                styles.dashboardButton,styles.boxWithShadow
               ]}
               onPress={HandleDashboardPress}
             >
@@ -565,7 +582,7 @@ const Questions = ({ route, navigation }) => {
                 {
                   backgroundColor: pressed ? "gray" : "white",
                 },
-                styles.logoutButton,
+                styles.logoutButton,styles.boxWithShadow
               ]}
               onPress={HandleLogout}
             >
@@ -666,6 +683,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 20,
     paddingTop: 15,
     marginTop: 30,
+    alignItems: 'center',
   },
   message: {
     fontSize: 20,
@@ -680,6 +698,30 @@ const styles = StyleSheet.create({
     marginTop: "2%",
 
   },
+
+  boxWithShadow: {
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 1 },
+    elevation: 5,
+    shadowRadius: 2,
+    shadowOpacity: 0.8,
+  },  
+  image: {
+    width: 70, // Adjust the width as needed
+    height: 80, // Adjust the height as needed
+    marginTop: "5%",
+    paddingRight: "30%",
+
+  },
+  senseiProg: {
+    flexDirection: 'row',
+    marginTop:"2%",
+    marginLeft: 0,
+    marginRight: "10%",
+  },
+
+  
+
 });
 
 export default Questions;

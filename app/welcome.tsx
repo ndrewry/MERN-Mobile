@@ -101,7 +101,7 @@ const styles = StyleSheet.create({
     borderWidth: 2,
     borderColor: "#fa304c",
     marginBottom: 60,
-  }
+  },
 });
 
 export default Welcome;

@@ -180,6 +180,7 @@ const styles = StyleSheet.create({
     borderWidth: 3,
     marginBottom: 20,
   },
+  
 });
 
 export default SignupScreen;

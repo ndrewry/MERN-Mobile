@@ -122,7 +122,6 @@ const styles = StyleSheet.create({
     borderWidth: 1.5,
     marginBottom: 20,
     paddingHorizontal: 10,
-    borderRadius: 3,
   },
   back: {
     marginTop: 20,
@@ -134,7 +133,6 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     backgroundColor: "#fa304c",
-    borderRadius: 3,
   },
   buttonGoBack: {
     marginTop: 15,
@@ -145,7 +143,6 @@ const styles = StyleSheet.create({
     borderColor: "#fa304c",
     borderWidth: 3,
     marginBottom: 20,
-    borderRadius: 3,
   },
 });
 
