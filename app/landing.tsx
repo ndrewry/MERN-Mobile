@@ -231,43 +231,23 @@ const Landing = () => {
               progress={item.CurrentQuestion / 10}
               width={200}
             />
+            <Text
+              style={{
+                color: "black",
+                fontSize: 12,
+                fontWeight: "bold",
+                marginVertical: 3,
+              }}
+            >
+              {item.CurrentQuestion * 10}% complete
+            </Text>
+            <Text style={{ color: "black", fontSize: 12 }}>
+              {item.NumCorrect} out of 10 correct
+            </Text>
           </Pressable>
         )}
         ItemSeparatorComponent={() => <View style={styles.separator} />}
       />
-      {/* {<Pressable style={[styles.option, styles.shadowProp]}>
-        <Text style={{ color: "black", fontSize: 17, fontWeight: "bold" }}>
-          Learning C From Zero to Hero
-        </Text>
-        <Image
-          source={require("../assets/images/clogo.png")}
-          style={[styles.image, styles.shadowProp]}
-          resizeMode="contain"
-        />
-        <View style={styles.progressBar}></View>
-      </Pressable>
-      <Pressable style={[styles.option, styles.shadowProp]}>
-        <Text style={{ color: "black", fontSize: 17, fontWeight: "bold" }}>
-          Build a Solid Foundation in Java
-        </Text>
-        <Image
-          source={require("../assets/images/javalogo.png")}
-          style={[styles.image, styles.shadowProp]}
-          resizeMode="contain"
-        />
-        <View style={styles.progressBar}></View>
-      </Pressable>
-      <Pressable style={[styles.option, styles.shadowProp]}>
-        <Text style={{ color: "black", fontSize: 17, fontWeight: "bold" }}>
-          Bringing Web Pages to Life With JavaScript
-        </Text>
-        <Image
-          source={require("../assets/images/jslogo.png")}
-          style={[styles.image, styles.shadowProp]}
-          resizeMode="contain"
-        />
-        <View style={styles.progressBar}></View>
-      </Pressable>} */}
 
       <Pressable onPress={() => navigation.navigate("login")}>
         <Text style={{ color: "black", fontSize: 17, fontWeight: "bold" }}>
@@ -301,7 +281,6 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     borderWidth: 2,
     borderColor: "black",
-    marginVertical: 10,
   },
   image: {
     width: "50%", // Adjust the width as needed
