@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   View,
   TextInput,
@@ -17,6 +17,7 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import Landing from "./landing";
 import { router } from "expo-router";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import * as Font from "expo-font";
 
 const LoginScreen = () => {
   const navigation = useNavigation();
@@ -25,6 +26,18 @@ const LoginScreen = () => {
   //var storage = require("./tokenStorage.js");
   const [login, setLogin] = useState("");
   const [password, setPassword] = useState("");
+
+  const fetchFonts = {
+    "BebasNeue-Regular": require("../assets/fonts/BebasNeue-Regular.ttf"),
+    SweetSansProThin: require("../assets/fonts/SweetSansProThin.ttf"),
+  };
+
+  useEffect(() => {
+    const loadFonts = async () => {
+      await Font.loadAsync(fetchFonts);
+    };
+    loadFonts();
+  }, []);
 
   const handleLogin = async () => {
     try {
@@ -64,7 +77,15 @@ const LoginScreen = () => {
 
   return (
     <View style={styles.container}>
-      <Text style={{ fontSize: 40, color: "#2e2e2e", paddingBottom: 80, fontWeight:"bold"}}>
+      <Text
+        style={{
+          fontSize: 50,
+          color: "#2e2e2e",
+          paddingBottom: 80,
+          fontWeight: "bold",
+          fontFamily: "BebasNeue-Regular",
+        }}
+      >
         Login
       </Text>
       <TextInput
@@ -82,7 +103,14 @@ const LoginScreen = () => {
       />
 
       <Pressable onPress={handleLogin} style={styles.buttonLogin}>
-        <Text style={{ color: "white", fontSize: 17, fontWeight: "bold" }}>
+        <Text
+          style={{
+            color: "white",
+            fontSize: 20,
+            fontWeight: "bold",
+            fontFamily: "SweetSansProThin",
+          }}
+        >
           Login
         </Text>
       </Pressable>
@@ -91,7 +119,14 @@ const LoginScreen = () => {
         onPress={() => navigation.goBack()}
         style={styles.buttonGoBack}
       >
-        <Text style={{ color: "#fa304c", fontSize: 17, fontWeight: "bold" }}>
+        <Text
+          style={{
+            color: "#fa304c",
+            fontSize: 20,
+            fontWeight: "bold",
+            fontFamily: "SweetSansProThin",
+          }}
+        >
           Go Back
         </Text>
       </Pressable>

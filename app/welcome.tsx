@@ -7,10 +7,33 @@ import {
   View,
 } from "react-native";
 import { Link } from "expo-router";
-import React from "react";
-//import { View } from "@/components/Themed";
+import React, { useState } from "react";
+import * as Font from "expo-font";
+import AppLoading from "expo-app-loading";
+
+const fetchFonts = {
+  "BebasNeue-Regular": require("../assets/fonts/BebasNeue-Regular.ttf"),
+  SweetSansProThin: require("../assets/fonts/SweetSansProThin.ttf"),
+};
 
 const Welcome = () => {
+  const [fontLoaded, setFontLoaded] = useState(false);
+
+  // Load custom fonts
+  const loadFonts = async () => {
+    await Font.loadAsync(fetchFonts);
+    setFontLoaded(true);
+  };
+
+  if (!fontLoaded) {
+    return (
+      <AppLoading
+        startAsync={loadFonts}
+        onError={(err) => console.error(err)}
+        onFinish={() => setFontLoaded(true)}
+      />
+    );
+  }
   return (
     <SafeAreaView style={{ flex: 1 }}>
       <View style={styles.container}>
@@ -20,8 +43,15 @@ const Welcome = () => {
           resizeMode="contain"
         />
         <View style={styles.syntaxContainer}>
-          <Text style={{ fontSize: 40, color: "black", paddingBottom: 50 }}>
-            SYNTA
+          <Text
+            style={{
+              fontSize: 40,
+              color: "black",
+              paddingBottom: 50,
+              fontFamily: "BebasNeue-Regular",
+            }}
+          >
+            S Y N T A
           </Text>
           <Image
             source={require("../assets/images/FancyX.png")}
@@ -35,16 +65,18 @@ const Welcome = () => {
             fontSize: 20,
             color: "black",
             paddingLeft: 100,
+            fontFamily: "BebasNeue-Regular",
           }}
         >
-          SENSEI
+          S E N S E I
         </Text>
 
         <Text
           style={{
-            fontSize: 10.5,
+            fontSize: 13,
             color: "black",
             paddingBottom: 120,
+            fontFamily: "SweetSansProThin",
           }}
         >
           Your dojo for mastering coding languages!
@@ -52,13 +84,17 @@ const Welcome = () => {
 
         <Link href="/signup" asChild>
           <Pressable style={styles.buttonSignup}>
-            <Text style={{ color: "white" }}>GET STARTED</Text>
+            <Text style={{ color: "white", fontFamily: "SweetSansProThin" }}>
+              GET STARTED
+            </Text>
           </Pressable>
         </Link>
 
         <Link href="/login" asChild>
           <Pressable style={styles.buttonLogin}>
-            <Text style={{ color: "#fa304c" }}>I ALREADY HAVE AN ACCOUNT</Text>
+            <Text style={{ color: "#fa304c", fontFamily: "SweetSansProThin" }}>
+              I ALREADY HAVE AN ACCOUNT
+            </Text>
           </Pressable>
         </Link>
       </View>

@@ -14,11 +14,18 @@ import React, { useEffect, useState } from "react";
 import { useNavigation } from "expo-router";
 import axios from "axios";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import * as Font from "expo-font";
 
 var imgPath = "null";
 var progress = 0.3;
 var token = "null";
 var storage = require("./tokenStorage.js");
+
+const fetchFonts = {
+  "BebasNeue-Regular": require("../assets/fonts/BebasNeue-Regular.ttf"),
+  SweetSansProThin: require("../assets/fonts/SweetSansProThin.ttf"),
+};
+
 type courseInfo = {
   Language: string;
   Description: string;
@@ -158,6 +165,12 @@ const Landing = () => {
   useEffect(() => {
     let ignore = false;
 
+    // Load custom fonts
+    const loadFonts = async () => {
+      await Font.loadAsync(fetchFonts);
+    };
+    loadFonts();
+
     AsyncStorage.getItem("token").then((t: any) => {
       token = t;
       var res = getCourses();
@@ -217,8 +230,8 @@ const Landing = () => {
             <Text
               style={{
                 color: "black",
-                fontSize: 17,
-                fontFamily: "Impact",
+                fontSize: 20,
+                fontFamily: "BebasNeue-Regular",
               }}
             >
               {returnCourseInfo(item.Language, courseInfo)}
@@ -313,7 +326,7 @@ const styles = StyleSheet.create({
     fontSize: 35,
     color: "#2e2e2e",
     paddingBottom: 10,
-    fontFamily: "Impact",
+    fontFamily: "BebasNeue-Regular",
   },
 });
 

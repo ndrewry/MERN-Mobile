@@ -13,8 +13,13 @@ import * as Progress from "react-native-progress";
 import { Link } from "expo-router";
 import React from "react";
 import axios from "axios";
+import * as Font from "expo-font";
 //import { View } from "@/components/Themed";
 
+const fetchFonts = {
+  "BebasNeue-Regular": require("../assets/fonts/BebasNeue-Regular.ttf"),
+  SweetSansProThin: require("../assets/fonts/SweetSansProThin.ttf"),
+};
 
 interface Choice {
   id: number;
@@ -129,6 +134,13 @@ const Questions = ({ route, navigation }) => {
   const GetRandomInt = () => {
     return Math.floor(Math.random() * (5 - 1) + 1);
   };
+
+  useEffect(() => {
+    const loadFonts = async () => {
+      await Font.loadAsync(fetchFonts);
+    };
+    loadFonts();
+  }, []);
 
   useEffect(() => {
     try {
@@ -455,26 +467,30 @@ const Questions = ({ route, navigation }) => {
               borderBottomRightRadius: 9,
             }}
           >
-            
             <View style={styles.senseiProg}>
-                <Image
-                    source={require("../assets/images/SenseiCropped.png")}
-                    style={styles.image}
-                    resizeMode="contain"
-
+              <Image
+                source={require("../assets/images/SenseiCropped.png")}
+                style={styles.image}
+                resizeMode="contain"
+              />
+              <View
+                style={{
+                  flexDirection: "column",
+                  marginTop: 5,
+                  paddingLeft: "3%",
+                }}
+              >
+                <Text style={{ marginTop: "15%", fontSize: 15 }}>
+                  Correct: {QuestionsCorrect} {"          "}Incorrect:{" "}
+                  {QuestionsIncorrect}
+                </Text>
+                <Progress.Bar
+                  color={"#fa304c"}
+                  progress={progress / 100}
+                  width={200}
+                  style={{ marginTop: 5 }}
                 />
-                 <View style={{flexDirection:'column',marginTop: 5, paddingLeft: "3%"}}>
-                    <Text style={{ marginTop: "15%", fontSize: 15 }}>
-                                Correct: {QuestionsCorrect} {"          "}Incorrect:{" "}
-                                {QuestionsIncorrect}
-                    </Text>  
-                    <Progress.Bar
-                            color={"#fa304c"}
-                            progress={progress / 100}
-                            width={200}
-                            style={{marginTop:5}}
-                    />
-                </View>
+              </View>
             </View>
 
             <View style={styles.questionContainer}>
@@ -545,7 +561,8 @@ const Questions = ({ route, navigation }) => {
 
             <View>
               {NextButton && (
-                <Pressable style = {styles.nextButton}
+                <Pressable
+                  style={styles.nextButton}
                   id="NextQuestionButton"
                   onPress={() => NextQuestion(CurrentQuestion)}
                 >
@@ -554,7 +571,8 @@ const Questions = ({ route, navigation }) => {
               )}
 
               {RestartButton && (
-                <Pressable style = {styles.nextButton}
+                <Pressable
+                  style={styles.nextButton}
                   id="RestartButton"
                   onPress={() => RestartLesson(token, Language, 0, 0)}
                 >
@@ -568,10 +586,10 @@ const Questions = ({ route, navigation }) => {
             <Pressable
               style={({ pressed }) => [
                 {
-                  backgroundColor: pressed ? "#fa304c" : "white",
-                  
+                  backgroundColor: pressed ? "gray" : "white",
                 },
-                styles.dashboardButton,styles.boxWithShadow
+                styles.dashboardButton,
+                styles.boxWithShadow,
               ]}
               onPress={HandleDashboardPress}
             >
@@ -582,7 +600,8 @@ const Questions = ({ route, navigation }) => {
                 {
                   backgroundColor: pressed ? "gray" : "white",
                 },
-                styles.logoutButton,styles.boxWithShadow
+                styles.logoutButton,
+                styles.boxWithShadow,
               ]}
               onPress={HandleLogout}
             >
@@ -603,12 +622,13 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   title: {
-    fontSize: 35,
+    fontSize: 40,
     fontWeight: "bold",
     color: "white",
     textShadowColor: "black",
     textShadowRadius: 5,
     marginTop: "4%",
+    fontFamily: "BebasNeue-Regular",
   },
   loadingContainer: {
     flex: 1,
@@ -627,7 +647,6 @@ const styles = StyleSheet.create({
     borderRadius: 8,
     marginVertical: 10,
     width: 350,
-
   },
   correctStyle: {
     backgroundColor: "#38b031",
@@ -656,7 +675,7 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderColor: "#ccc",
     borderRadius: 8,
-    marginTop:"5%",
+    marginTop: "5%",
   },
   logoutButton: {
     paddingHorizontal: 30,
@@ -665,16 +684,17 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderColor: "#ccc",
     borderRadius: 8,
-    marginTop:"5%",
+    marginTop: "5%",
   },
   choiceText: {
     fontSize: 16,
     color: "#333",
   },
   buttonText: {
-    fontSize: 20,
+    fontSize: 25,
     color: "#fa304c",
     fontWeight: "bold",
+    fontFamily: "BebasNeue-Regular",
   },
   questionContainer: {
     borderColor: "black",
@@ -683,45 +703,40 @@ const styles = StyleSheet.create({
     paddingHorizontal: 20,
     paddingTop: 15,
     marginTop: 30,
-    alignItems: 'center',
+    alignItems: "center",
   },
   message: {
     fontSize: 20,
     fontWeight: "bold",
   },
-  nextButton:{
+  nextButton: {
     paddingVertical: "2%",
     paddingHorizontal: 20,
     borderWidth: 1,
     borderColor: "#ccc",
     borderRadius: 8,
     marginTop: "2%",
-
   },
 
   boxWithShadow: {
-    shadowColor: '#000',
+    shadowColor: "#000",
     shadowOffset: { width: 0, height: 1 },
     elevation: 5,
     shadowRadius: 2,
     shadowOpacity: 0.8,
-  },  
+  },
   image: {
     width: 70, // Adjust the width as needed
     height: 80, // Adjust the height as needed
     marginTop: "5%",
     paddingRight: "30%",
-
   },
   senseiProg: {
-    flexDirection: 'row',
-    marginTop:"2%",
+    flexDirection: "row",
+    marginTop: "2%",
     marginLeft: 0,
     marginRight: "10%",
   },
-
-  
-
 });
 
 export default Questions;
