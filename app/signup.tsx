@@ -9,15 +9,16 @@ import {
   Pressable,
 } from "react-native";
 import axios from "axios";
-import {  useNavigation } from "expo-router";
+import { useNavigation } from "expo-router";
 import BackButton from "@/components/BackButton";
 import LoginScreen from "./login";
-
 
 const SignupScreen = () => {
   const navigation = useNavigation();
 
-  React.useEffect(() => {navigation.setOptions({ headerShown: false });}, [navigation]);
+  React.useEffect(() => {
+    navigation.setOptions({ headerShown: false });
+  }, [navigation]);
 
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
@@ -63,7 +64,7 @@ const SignupScreen = () => {
     var js1 = JSON.stringify(obj1);
     var config1 = {
       method: "post",
-      url: "http://10.0.2.2:5000/api/sendVerificationLink",
+      url: "http://syntax-sensei-a349ca4c0ed0.herokuapp.com/api/sendVerificationLink",
       headers: {
         "Content-Type": "application/json",
       },
@@ -177,7 +178,7 @@ const styles = StyleSheet.create({
     borderColor: "#fa304c",
     borderWidth: 3,
     marginBottom: 20,
-  }
+  },
 });
 
 export default SignupScreen;

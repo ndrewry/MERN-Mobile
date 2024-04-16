@@ -206,6 +206,9 @@ const Landing = () => {
 
   return (
     <SafeAreaView style={styles.container}>
+      <Text style={{ fontSize: 40, color: "#2e2e2e", paddingBottom: 10 }}>
+        My Courses
+      </Text>
       <FlatList
         data={courses}
         renderItem={({ item }) => (
