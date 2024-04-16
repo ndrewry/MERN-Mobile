@@ -433,12 +433,12 @@ const Questions = ({ route, navigation }) => {
 
   return (
     <View style={{ flex: 1 }}>
-      <View style={{ flex: 1, backgroundColor: "red" }}>
+      <View style={{ flex: 1, backgroundColor: "#fa304c" }}>
         <SafeAreaView style={{ flex: 1, flexDirection: "column" }}>
           <View
             style={{
-              flex: 0.75,
-              backgroundColor: "red",
+              flex: 0.9,
+              backgroundColor: "#fa304c",
               alignItems: "center",
             }}
           >
@@ -451,12 +451,12 @@ const Questions = ({ route, navigation }) => {
               alignItems: "center",
             }}
           >
-            <Text style={{ marginTop: 8, fontSize: 15 }}>
+            <Text style={{ marginTop: 20, fontSize: 15 }}>
               Correct: {QuestionsCorrect} {"          "}Incorrect:{" "}
               {QuestionsIncorrect}
             </Text>
             <Progress.Bar
-              color={"red"}
+              color={"#fa304c"}
               progress={progress / 100}
               width={200}
               style={{ marginTop: 10 }}
@@ -548,7 +548,7 @@ const Questions = ({ route, navigation }) => {
             </View>
           </View>
 
-          <View style={[{ backgroundColor: "red" }, styles.container]}>
+          <View style={[{ backgroundColor: "#fa304c" }, styles.container]}>
             <Pressable
               style={({ pressed }) => [
                 {
@@ -619,7 +619,7 @@ const styles = StyleSheet.create({
     width: 350,
   },
   incorrectStyle: {
-    backgroundColor: "red",
+    backgroundColor: "#fa304c",
     paddingHorizontal: 10,
     paddingVertical: 8,
     borderWidth: 1,

@@ -224,7 +224,7 @@ const Landing = () => {
               resizeMode="contain"
             />
             <Progress.Bar
-              color={"red"}
+              color={"#fa304c"}
               progress={item.CurrentQuestion / 10}
               width={200}
             />
@@ -291,8 +291,8 @@ const styles = StyleSheet.create({
   },
   option: {
     width: 300,
-    height: 200,
-    backgroundColor: "lightgrey",
+    height: "95%",
+    backgroundColor: "white",
     justifyContent: "center",
     alignItems: "center",
     borderRadius: 10,
@@ -309,7 +309,7 @@ const styles = StyleSheet.create({
     shadowColor: "#171717",
     shadowOffset: { width: -2, height: 4 },
     shadowOpacity: 0.2,
-    shadowRadius: 3,
+    shadowRadius: 6,
   },
   separator: {
     width: "100%",
